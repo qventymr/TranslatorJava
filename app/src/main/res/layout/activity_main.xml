@@ -10,9 +10,9 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="355dp"
-        android:layout_marginHorizontal="75dp"
-        android:textSize="24dp"
+        android:layout_marginTop="355sp"
+        android:layout_marginHorizontal="75sp"
+        android:textSize="24sp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,32 +25,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="35sp"
         android:ems="10"
         android:hint="@string/texthere"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48sp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/EditTextPole"
-        android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="5sp"
+        android:layout_marginHorizontal="100sp"
         android:text="Далее" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginEnd="200dp"
-        android:layout_marginStart="0dp"/>
+        android:layout_height="35sp"
+        android:layout_marginEnd="205sp"
+        android:layout_marginStart="0sp"/>
     <Spinner
         android:id="@+id/spinnertwo"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginEnd="0dp"/>
+        android:layout_height="35sp"
+        android:layout_marginStart="205sp"
+        android:layout_marginEnd="0sp"/>
 
 </RelativeLayout>
