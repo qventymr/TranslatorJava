@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="texthere">TextHere</string>
+    <string name="textNoUserInput">Введите текст</string>
+</resources>
