@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnertwo;
     private String langToSelected;
     private String langFromSelected;
+    private ImageButton ttsButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         Spinner spinnertwo = (Spinner) findViewById(R.id.spinnertwo);
+        ttsButton = findViewById(R.id.ttsButton);
 
         List<String> elements = new ArrayList<String>();
 
@@ -73,11 +77,44 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(dataAdapter);
         spinnertwo.setAdapter(dataAdapter);
 
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    Locale defaultLocale = Locale.getDefault();
+                    // Установка языка для TextToSpeech
+                    int result = textToSpeech.setLanguage(defaultLocale);
+                }
+            }
+        });
+
+        ttsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity.this, R.string.textNoUserInput, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    text = editText.getText().toString();
+                    textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                }
+            }
+        });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 langFromSelected = elements.get(position).substring(0, 2);
-                result_text.setText(langFromSelected);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnertwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                langToSelected = elements.get(position).substring(0, 2);
             }
 
             @Override
@@ -93,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     text = editText.getText().toString();
                     try {
-                        finish_text = translate("ru", "en", text);
+                        finish_text = translate(langFromSelected, langToSelected, text);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
